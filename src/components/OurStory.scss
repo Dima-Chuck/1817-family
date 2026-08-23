@@ -1,0 +1,61 @@
+.our-story {
+  position: relative;
+  min-height: 100vh;
+
+  &__pin {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  &__header {
+    position: absolute;
+    top: clamp(2rem, 8vh, 5rem);
+    left: clamp(1.5rem, 5vw, 4rem);
+    z-index: 10;
+    max-width: 40ch;
+  }
+
+  &__title {
+    margin-top: 0.5rem;
+  }
+
+  &__quote {
+    margin-top: 1.5rem;
+  }
+
+  &__photos {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__photo-layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+
+    &:first-child {
+      opacity: 1;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10, 9, 8, 0.7) 0%,
+        transparent 40%,
+        rgba(10, 9, 8, 0.3) 100%
+      );
+      pointer-events: none;
+    }
+  }
+
+  &__photo {
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,13 @@
+.app {
+  position: relative;
+  min-height: 100vh;
+
+  &__main {
+    opacity: 0;
+    transition: opacity 0.8s $ease-cinematic;
+  }
+
+  &--ready &__main {
+    opacity: 1;
+  }
+}

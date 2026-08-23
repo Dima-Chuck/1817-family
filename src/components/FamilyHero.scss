@@ -1,0 +1,38 @@
+.family-hero {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-deep;
+  position: relative;
+
+  &__inner {
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+
+  &__time {
+    @include display-title;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: $text-dim;
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+  }
+
+  &__line {
+    width: clamp(60px, 15vw, 120px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $warm-gold, transparent);
+    margin: 2rem auto;
+    transform-origin: center;
+    opacity: 0;
+  }
+
+  &__hint {
+    @include body-text;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $text-dim;
+  }
+}

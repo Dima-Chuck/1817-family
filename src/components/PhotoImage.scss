@@ -1,0 +1,56 @@
+.photo-image {
+  position: relative;
+  overflow: hidden;
+  background: $bg-card;
+
+  &__placeholder {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      $bg-card 0%,
+      rgba(201, 168, 124, 0.06) 50%,
+      $bg-card 100%
+    );
+    transition: opacity 1.2s $ease-cinematic;
+  }
+
+  &__img {
+    @include responsive-image;
+    opacity: 0;
+    transform: scale(1.03);
+    transition:
+      opacity 1.4s $ease-cinematic,
+      transform 2s $ease-out-expo;
+  }
+
+  &--loaded &__img {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &--loaded &__placeholder {
+    opacity: 0;
+  }
+
+  &--error &__placeholder {
+    background: linear-gradient(
+      160deg,
+      $bg-card,
+      rgba(201, 168, 124, 0.08)
+    );
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 20px,
+        rgba(201, 168, 124, 0.03) 20px,
+        rgba(201, 168, 124, 0.03) 21px
+      );
+    }
+  }
+}

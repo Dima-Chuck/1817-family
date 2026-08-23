@@ -1,0 +1,104 @@
+.family-section {
+  position: relative;
+  background: linear-gradient(180deg, $bg-section 0%, $bg-deep 50%, $bg-section 100%);
+
+  &__transition {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $section-padding clamp(1.5rem, 5vw, 4rem);
+    opacity: 0;
+  }
+
+  &__transition-text {
+    @include display-title;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-style: italic;
+    text-align: center;
+    color: $text-muted;
+    max-width: 20ch;
+  }
+
+  &__content {
+    @include section-padding;
+    @include container;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: clamp(3rem, 8vh, 5rem);
+  }
+
+  &__title {
+    margin-top: 0.5rem;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    min-height: 70vh;
+  }
+
+  &__item {
+    @include photo-frame;
+    opacity: 0;
+
+    &--1 {
+      grid-column: 1 / 8;
+      grid-row: 1 / 3;
+    }
+
+    &--2 {
+      grid-column: 8 / 13;
+      grid-row: 1 / 2;
+    }
+
+    &--3 {
+      grid-column: 8 / 13;
+      grid-row: 2 / 3;
+    }
+
+    &:nth-child(4) {
+      grid-column: 1 / 5;
+      grid-row: 3 / 4;
+    }
+
+    &:nth-child(5) {
+      grid-column: 5 / 9;
+      grid-row: 3 / 4;
+    }
+
+    &:nth-child(6) {
+      grid-column: 9 / 13;
+      grid-row: 3 / 4;
+    }
+  }
+
+  &__photo {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+  }
+
+  @media (max-width: 768px) {
+    &__grid {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: minmax(160px, auto);
+    }
+
+    &__item,
+    &__item--1,
+    &__item--2,
+    &__item--3 {
+      grid-column: span 1 !important;
+      grid-row: span 1 !important;
+
+      &:nth-child(1) {
+        grid-column: span 2 !important;
+      }
+    }
+  }
+}

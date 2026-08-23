@@ -1,0 +1,96 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: auto; // Lenis handles smooth scroll
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-body;
+  background: $bg-deep;
+  color: $text-primary;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(201, 168, 124, 0.3);
+  color: $text-primary;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-deep;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 124, 0.25);
+  border-radius: 3px;
+
+  &:hover {
+    background: rgba(201, 168, 124, 0.4);
+  }
+}
+
+.section-label {
+  @include body-text;
+  font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: $warm-gold;
+  opacity: 0.7;
+}
+
+.section-title {
+  @include display-title;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+}
+
+.section-quote {
+  @include body-text;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  max-width: 32ch;
+  font-style: italic;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

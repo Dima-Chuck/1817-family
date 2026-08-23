@@ -1,0 +1,28 @@
+// Colors
+$bg-deep: #0a0908;
+$bg-section: #0f0e0c;
+$bg-card: #161412;
+$warm-light: #e8dcc8;
+$warm-gold: #c9a87c;
+$warm-amber: #d4a574;
+$warm-glow: rgba(201, 168, 124, 0.15);
+$text-primary: #f5f0e8;
+$text-muted: rgba(245, 240, 232, 0.55);
+$text-dim: rgba(245, 240, 232, 0.35);
+
+// Typography
+$font-display: 'Cormorant Garamond', 'Georgia', serif;
+$font-body: 'Inter', system-ui, sans-serif;
+
+// Spacing
+$section-padding: clamp(5rem, 12vh, 10rem);
+$container-max: 1400px;
+
+// Transitions
+$ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+// Z-index
+$z-grain: 9999;
+$z-intro: 10000;
+$z-lightbox: 10001;
