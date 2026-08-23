@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 @mixin section-padding {
   padding: $section-padding clamp(1.5rem, 5vw, 4rem);
 }
