@@ -1,8 +1,9 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// ⚠️ GitHub Pages: замените 1817-family на ТОЧНОЕ название вашего репозитория на GitHub
-// Пример: репозиторий github.com/dima/semja → base: '/semja/'
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_NAME = '1817-family';
 
 export default defineConfig({
@@ -11,7 +12,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "src/styles/variables" as *; @use "src/styles/mixins" as *;`,
+        additionalData: `@use "variables" as *; @use "mixins" as *;`,
+        loadPaths: [path.resolve(__dirname, 'src/styles')],
       },
     },
   },
