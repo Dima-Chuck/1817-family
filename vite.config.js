@@ -13,15 +13,11 @@ export default defineConfig({
   base: process.env.GITHUB_PAGES ? `/${REPO_NAME}/` : '/',
   plugins: [react()],
   css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData(source, filePath) {
-          if (filePath?.includes('_variables.scss') || filePath?.includes('_mixins.scss')) {
-            return source;
-          }
-          return `@use "${sassVar}" as *; @use "${sassMix}" as *;\n${source}`;
-        },
-      },
+  preprocessorOptions: {
+    scss: {
+      loadPaths: [stylesPath],
+      additionalData: `@use "variables" as *; @use "mixins" as *;`,
     },
   },
+},
 });
