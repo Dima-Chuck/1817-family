@@ -27,36 +27,58 @@ export default function BackgroundMusic({ active }) {
     fadeRef.current = requestAnimationFrame(step);
   }, []);
 
-  const playMusic = useCallback(async () => {
+  const playMusic = useCallback(async (withSound = true) => {
     const audio = audioRef.current;
-    if (!audio || !active || !audio.paused) return;
+    if (!audio || !active) return;
 
     try {
+      // Autoplay policies allow a muted start. Once the page has received a
+      // user gesture, immediately restore sound and fade it in.
+      if (withSound) audio.muted = false;
       await audio.play();
       fadeIn();
     } catch {
-      // Браузер запретил autoplay со звуком — запускаем при первом действии пользователя.
+      // If sound autoplay is blocked, keep the track ready and wait for the
+      // first user gesture. This is a browser restriction, not a missing file.
+      audio.muted = true;
+      try {
+        await audio.play();
+      } catch {
+        // Ignore until the next user interaction.
+      }
     }
   }, [active, fadeIn]);
 
   useEffect(() => {
-    if (!active) return;
+    if (!active) return undefined;
 
-    playMusic();
+    const audio = audioRef.current;
+    if (!audio) return undefined;
 
-    const resume = () => playMusic();
-    window.addEventListener('pointerdown', resume, { once: true });
-    window.addEventListener('keydown', resume, { once: true });
-    window.addEventListener('touchstart', resume, { once: true });
-    window.addEventListener('scroll', resume, { once: true, passive: true });
+    // Start the track as soon as the intro finishes. Muted autoplay is allowed
+    // by modern browsers and prevents the track from disappearing completely.
+    audio.muted = true;
+    audio.volume = 0;
+    audio.play().then(() => {
+      // If the browser permits scripted unmute after autoplay, fade in now.
+      audio.muted = false;
+      fadeIn();
+    }).catch(() => {});
+
+    const resumeWithSound = () => {
+      playMusic(true);
+    };
+
+    window.addEventListener('pointerdown', resumeWithSound, { once: true });
+    window.addEventListener('keydown', resumeWithSound, { once: true });
+    window.addEventListener('touchstart', resumeWithSound, { once: true });
 
     return () => {
-      window.removeEventListener('pointerdown', resume);
-      window.removeEventListener('keydown', resume);
-      window.removeEventListener('touchstart', resume);
-      window.removeEventListener('scroll', resume);
+      window.removeEventListener('pointerdown', resumeWithSound);
+      window.removeEventListener('keydown', resumeWithSound);
+      window.removeEventListener('touchstart', resumeWithSound);
     };
-  }, [active, playMusic]);
+  }, [active, fadeIn, playMusic]);
 
   useEffect(() => () => {
     if (fadeRef.current) cancelAnimationFrame(fadeRef.current);
@@ -68,7 +90,6 @@ export default function BackgroundMusic({ active }) {
       src={MUSIC_SRC}
       loop
       preload="auto"
-      autoPlay
       aria-hidden="true"
     />
   );
