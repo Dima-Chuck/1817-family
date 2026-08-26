@@ -49,11 +49,12 @@
   }
 }
 
-// Fill the photo frame without distorting the source image.
+// Preserve the complete source frame. Fixed containers can have empty space
+// on the sides/top instead of cutting people out of portrait photos.
 @mixin responsive-image {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
 }
