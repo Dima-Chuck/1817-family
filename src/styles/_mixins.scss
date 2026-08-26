@@ -49,9 +49,13 @@
   }
 }
 
+// Изображения всегда занимают доступный экран без растягивания.
+// На узких экранах оставляем cover, на широких показываем кадр целиком,
+// чтобы портретные фотографии не обрезались агрессивно.
 @mixin responsive-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
 }
