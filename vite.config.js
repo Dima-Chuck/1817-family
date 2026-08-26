@@ -14,6 +14,12 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         loadPaths: [stylesPath],
+        additionalData(source, filePath) {
+          if (filePath.endsWith('_variables.scss') || filePath.endsWith('_mixins.scss')) {
+            return source;
+          }
+          return `@use "variables" as *;\n@use "mixins" as *;\n${source}`;
+        },
       },
     },
   },
