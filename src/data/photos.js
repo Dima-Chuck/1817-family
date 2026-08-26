@@ -3,7 +3,8 @@
  * Файлы лежат в public/photos/
  */
 
-const p = (folder, file) => `/photos/${folder}/${file}`;
+// Учитываем base Vite, чтобы пути работали и локально, и на GitHub Pages.
+const p = (folder, file) => `${import.meta.env.BASE_URL}photos/${folder}/${file}`;
 
 export const photos = {
   intro: p('hero', 'intro.png'),
