@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { texts } from '../data/texts';
 import './BackgroundMusic.scss';
 
-const MUSIC_SRC = `/audio/${texts.music.filename}`;
+// Учитываем base Vite, чтобы музыка работала и локально, и на GitHub Pages.
+const MUSIC_SRC = `${import.meta.env.BASE_URL}audio/${texts.music.filename}`;
 const FADE_DURATION = 2500;
 const TARGET_VOLUME = 0.35;
 
@@ -105,7 +106,7 @@ export default function BackgroundMusic({ active }) {
             </svg>
           ) : (
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M11 5L6 9H2v6h4l5 4V5z" />
+              <path d="M11 5L6 9H2v6h4l5 4" />
               <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
             </svg>
           )}
